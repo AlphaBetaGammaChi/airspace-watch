@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Airspace Watch — flight pass-through log</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="panel">
+    <h1>Airspace Watch</h1>
+    <button id="draw-box">Draw query box</button>
+    <button id="clear-box" disabled>Clear</button>
+    <div id="box-info" class="muted">no box drawn</div>
+
+    <fieldset>
+      <legend>Query recorded log</legend>
+      <label>Region(s)
+        <select id="regions" multiple size="3"></select>
+      </label>
+      <label>From <input type="datetime-local" id="t0" step="60"></label>
+      <label>To <input type="datetime-local" id="t1" step="60"></label>
+      <button id="query">Query log</button>
+      <button id="export" disabled>Export CSV</button>
+    </fieldset>
+
+    <fieldset>
+      <legend>Live</legend>
+      <button id="live">Who's in the box now?</button>
+    </fieldset>
+
+    <div id="status" class="muted"></div>
+    <div id="results">
+      <table id="results-table">
+        <thead>
+          <tr>
+            <th>Callsign</th><th>ICAO24</th><th>Type</th><th>Reg</th>
+            <th>First seen</th><th>Last seen</th><th>Alt (ft)</th><th>Pts</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="muted small">
+      Data: <a href="https://adsb.lol">adsb.lol</a> (ODbL).
+      Dashed boxes = regions being recorded by the repo's GitHub Action.
+      History only exists for times/regions covered since the recorder started.
+    </p>
+  </div>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
